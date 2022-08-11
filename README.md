@@ -15,7 +15,7 @@ machine. For more information, please refer to
 ```sh
 # Clone this repo
 git clone https://github.com/terabayashik/selective-video-streamer.git
-cd selective-video-streamer.git
+cd selective-video-streamer
 
 # Install dependencies
 npm i
