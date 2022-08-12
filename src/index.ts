@@ -33,7 +33,7 @@ const main = () => {
       for (const item of activeStreams.keys()) {
         if (isEqual(key, item)) {
           res.send("This stream has already started.");
-          break;
+          return;
         }
       }
       const stream = startStream(req.query);
