@@ -55,3 +55,24 @@ Access `/info` to get stream info.
 ```sh
 curl "localhost:3000/info"
 ```
+
+Sample result is like this. Use `jq` for more readability.
+
+```sh
+jq . <<< `curl -s "localhost:3000/info"`
+```
+
+```json
+{
+  "streams": [
+    {
+      "dirpath": "/path/to/vid",
+      "filename": "source_1.flv"
+    },
+    {
+      "dirpath": "/path/to/vid",
+      "filename": "source_2.flv"
+    }
+  ]
+}
+```
