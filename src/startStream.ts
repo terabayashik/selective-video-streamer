@@ -27,7 +27,7 @@ export const startStream = (query: Query) => {
   });
   ffmpegStream.on("spawn", () => {
     console.log(
-      `Stream of ${query.filename} available from http://localhost/live/${filename}}.m3u8`
+      `Stream of ${query.filename} available from http://localhost/live/${filename}.m3u8`
     );
   });
   ffmpegStream.on("exit", (code) => {
