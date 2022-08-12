@@ -64,7 +64,7 @@ const main = () => {
           console.log(`Stream of ${key.filename} stopped.`);
           activeStreams.delete(streamKey);
           res.send(`Successfully stopped playing "${req.query.filename}".`);
-          break;
+          return;
         }
       }
       res.status(404).send("Stream not found.");
