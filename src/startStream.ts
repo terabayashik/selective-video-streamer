@@ -3,8 +3,6 @@ import { spawn } from "child_process";
 import path from "path";
 
 export const startStream = (query: Query) => {
-  // Sample
-  // ffmpeg -y -re -stream_loop -1 -i "./【MMD】ＸＳさんでPackaged (HD)【MME】_tc.mp4" -codec:v copy -codec:a copy -fflags genpts -flags +global_header -f flv "rtmp://localhost/live/10"
   const filename = path.parse(query.filename).name;
   // TODO: Add "-flags +global_header" if needed
   const ffmpegStream = spawn("ffmpeg", [
@@ -28,10 +26,12 @@ export const startStream = (query: Query) => {
     }
   });
   ffmpegStream.on("spawn", () => {
-    console.log(`Stream for ${query.filename} started`);
+    console.log(
+      `Stream of ${query.filename} available from http://localhost/live/${filename}}.m3u8`
+    );
   });
   ffmpegStream.on("exit", (code) => {
-    console.log(`Stream for ${query.filename} exited with code ${code}`);
+    console.log(`Stream of ${query.filename} exited with code ${code}`);
   });
   return ffmpegStream;
 };

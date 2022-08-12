@@ -53,8 +53,9 @@ const main = () => {
       const stream = activeStreams.get(key);
       if (stream) {
         stopStream(stream);
+        console.log(`Stream of ${key.filename} stopped.`);
         activeStreams.delete(key);
-        res.send(`Successfully stop playing "${req.query.filename}".`);
+        res.send(`Successfully stopped playing "${req.query.filename}".`);
       } else {
         res.status(404).send("Stream not found.");
       }
@@ -68,7 +69,13 @@ const main = () => {
   });
 
   app.get("/info", (_, res) => {
-    res.json(activeStreams);
+    const json = { streams: [] } as {
+      streams: { dirpath: string; filename: string }[];
+    };
+    for (const stream of activeStreams.keys()) {
+      json.streams.push({ dirpath: stream.dirpath, filename: stream.filename });
+    }
+    res.json(json);
   });
 
   app.listen(port, () => {
