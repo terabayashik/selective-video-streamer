@@ -22,7 +22,8 @@ export const startStream = (query: Query) => {
     `rtmp://localhost/live/${filename}`,
   ]);
   // TODO: Add handler to update stream info
-  ffmpegStream.stdout.on("data", (line: string) => {
+  ffmpegStream.stdout.on("data", (data) => {
+    const line = `${data}`;
     if (line.startsWith("frame=")) {
       console.log(line);
     }
