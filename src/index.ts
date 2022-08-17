@@ -1,5 +1,6 @@
 import { isQuery } from "./Query";
 import { checkDeps } from "./checkDeps";
+import { getGlobalIp } from "./getGlobalIp";
 import { startStream } from "./startStream";
 import { stopStream } from "./stopStream";
 import { ChildProcessWithoutNullStreams } from "child_process";
@@ -24,7 +25,7 @@ const main = () => {
     res.send("Hi.");
   });
 
-  app.get("/start", (req, res) => {
+  app.get("/start", async (req, res) => {
     if (isQuery(req.query)) {
       const key = {
         dirpath: req.query.dirpath,
@@ -41,7 +42,9 @@ const main = () => {
       res.send(
         `Successfully started playing "${
           req.query.filename
-        }" at http://localhost/live/${path.parse(key.filename).name}.m3u8.`
+        }" at http://${await getGlobalIp()}/live/${
+          path.parse(key.filename).name
+        }.m3u8.`
       );
     } else {
       res
