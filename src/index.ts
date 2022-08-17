@@ -94,14 +94,17 @@ const main = () => {
     console.log("[Usage]");
     console.log("- Start stream");
     console.log(
-      `curl http://${await getGlobalIp()}:${port}/start?dirpath=/path/to/vid&filename=video.mp4`
+      `curl "http://${await getGlobalIp()}:${port}/start?dirpath=/path/to/vid&filename=video.mp4"`
     );
     console.log("- Stop stream");
     console.log(
-      `curl http://${await getGlobalIp()}:${port}/stop?dirpath=/path/to/vid&filename=video.mp4`
+      `curl "http://${await getGlobalIp()}:${port}/stop?dirpath=/path/to/vid&filename=video.mp4"`
     );
     console.log("- Show stream info");
-    console.log(`curl http://${await getGlobalIp()}:${port}/info`);
+    console.log(`curl "http://${await getGlobalIp()}:${port}/info"`);
+    console.log(
+      "=================================================================="
+    );
   });
 };
 
