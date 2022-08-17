@@ -4,7 +4,6 @@ import path from "path";
 
 export const startStream = (query: Query) => {
   const filename = path.parse(query.filename).name;
-  // TODO: Add "-flags +global_header" if needed
   const ffmpegStream = spawn("ffmpeg", [
     "-y",
     "-re",
@@ -14,12 +13,15 @@ export const startStream = (query: Query) => {
     path.join(query.dirpath, query.filename),
     "-c",
     "copy",
+    "-flags",
+    "+global_header",
     "-fflags",
     "+genpts",
     "-f",
     "flv",
     `rtmp://localhost/live/${filename}`,
   ]);
+  // TODO: Add handler to update stream info
   ffmpegStream.stdout.on("data", (line: string) => {
     if (line.startsWith("frame=")) {
       console.log(line);
