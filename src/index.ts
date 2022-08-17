@@ -90,8 +90,18 @@ const main = () => {
     res.json(json);
   });
 
-  app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
+  app.listen(port, async () => {
+    console.log("[Usage]");
+    console.log("- Start stream");
+    console.log(
+      `curl http://${await getGlobalIp()}:${port}/start?dirpath=/path/to/vid&filename=video.mp4`
+    );
+    console.log("- Stop stream");
+    console.log(
+      `curl http://${await getGlobalIp()}:${port}/stop?dirpath=/path/to/vid&filename=video.mp4`
+    );
+    console.log("- Show stream info");
+    console.log(`curl http://${await getGlobalIp()}:${port}/info`);
   });
 };
 
